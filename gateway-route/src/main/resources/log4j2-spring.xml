@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+  <Properties>
+    <Property name="PID">${PID}</Property>
+    <property name="LOG_HOME">logs</property>
+    <Property name="LOG_FILE">${LOG_HOME}/api-gateway</Property>
+    <Property name="LOG_ERROR">${LOG_HOME}/api-gateway-error</Property>
+    <Property name="LECW">%xwEx</Property>
+    <Property name="LLP">%5p</Property>
+    <Property name="LDP">yyyy-MM-dd HH:mm:ss.SSS</Property>
+    <Property name="CONSOLE_LOG_PATTERN">
+      %clr{%d{${LDP}}}{faint} %clr{${LLP}} %clr{${sys:PID}}{magenta} %clr{---}{faint}
+      %clr{[%15.15t]}{faint} %clr{%-40.40c{1.}}{cyan} %clr{%L:}{faint}%m%n${sys:LECW}
+    </Property>
+    <Property name="FILE_PATTERN">
+      %d{${LDP}} ${LLP} ${sys:PID} --- [%t]%-40.40c{1.} %clr{%L:} %m%n${sys:LECW}
+    </Property>
+    <Property name="ERROR_PATTERN">
+      %d{${LDP}} ${LLP} ${sys:PID} --- [%t]%-40.40c{1.} %clr{%L:} %m%n${sys:LECW}
+    </Property>
+  </Properties>
+  <Appenders>
+    <Console follow="true" name="Console" target="SYSTEM_OUT">
+      <PatternLayout pattern="${sys:CONSOLE_LOG_PATTERN}"/>
+    </Console>
+
+    <RollingFile fileName="${LOG_FILE}.log" filePattern="${LOG_FILE}-%i.log" name="LogFile">
+      <PatternLayout pattern="${sys:FILE_PATTERN}"/>
+      <Policies>
+        <SizeBasedTriggeringPolicy size="50 MB"/>
+      </Policies>
+      <DefaultRolloverStrategy max="10"/>
+    </RollingFile>
+
+    <RollingFile fileName="${LOG_ERROR}.log" filePattern="${LOG_ERROR}-%i.log" name="LogError">
+      <PatternLayout pattern="${sys:ERROR_PATTERN}"/>
+      <Policies>
+        <SizeBasedTriggeringPolicy size="50 MB"/>
+      </Policies>
+      <DefaultRolloverStrategy max="3"/>
+    </RollingFile>
+  </Appenders>
+  <Loggers>
+    <Logger level="error" name="org.apache.catalina.startup.DigesterFactory"/>
+    <Logger level="error" name="org.apache.catalina.util.LifecycleBase"/>
+    <Logger level="warn" name="org.apache.coyote.http11.Http11NioProtocol"/>
+    <logger level="warn" name="org.apache.sshd.common.util.SecurityUtils"/>
+    <Logger level="warn" name="org.apache.tomcat.util.net.NioSelectorPool"/>
+    <Logger level="error" name="org.eclipse.jetty.util.component.AbstractLifeCycle"/>
+    <Logger level="warn" name="org.hibernate.validator.internal.util.Version"/>
+    <logger level="warn" name="org.springframework.boot.actuate.endpoint.jmx"/>
+    <logger level="debug" name="ai.shuzhi"/>
+    <logger level="debug" name="tk.mybatis"/>
+    <Root level="info">
+      <AppenderRef ref="Console"/>
+      <AppenderRef level="debug" ref="LogFile"/>
+      <AppenderRef level="error" ref="LogError"/>
+    </Root>
+  </Loggers>
+</Configuration>

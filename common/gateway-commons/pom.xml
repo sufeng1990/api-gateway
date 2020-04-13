@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <artifactId>iot-api-gateway</artifactId>
+    <groupId>ai.shuzhi.iot.gateway</groupId>
+    <version>0.0.1-SNAPSHOT</version>
+    <relativePath>../../</relativePath><!-- lookup parent from repository -->
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>gateway-commons</artifactId>
+  <name>gateway-commons</name>
+  <description>应用网关公共包</description>
+  <properties></properties>
+
+  <dependencies>
+<!--    <dependency>-->
+<!--      <groupId>javax.validation</groupId>-->
+<!--      <artifactId>validation-api</artifactId>-->
+<!--    </dependency>-->
+<!--    <dependency>-->
+<!--      <groupId>ai.shuzhi.framework</groupId>-->
+<!--      <artifactId>utils-starter</artifactId>-->
+<!--    </dependency>-->
+
+<!--    <dependency>-->
+<!--      <groupId>org.mapstruct</groupId>-->
+<!--      <artifactId>mapstruct-processor</artifactId>-->
+<!--    </dependency>-->
+<!--    <dependency>-->
+<!--      <groupId>com.github.pagehelper</groupId>-->
+<!--      <artifactId>pagehelper-spring-boot-starter</artifactId>-->
+<!--    </dependency>-->
+  </dependencies>
+
+</project>
