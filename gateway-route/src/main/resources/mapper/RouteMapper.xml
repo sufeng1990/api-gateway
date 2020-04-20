@@ -3,7 +3,5 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ai.shuzhi.iot.gateway.route.mapper.RouteMapper">
 
-  <select id="selectAll" resultType="ai.shuzhi.iot.gateway.route.entity.Route">
-    SELECT * FROM route
-  </select>
+
 </mapper>

@@ -11,7 +11,6 @@ import org.springframework.web.server.ServerWebExchange;
  * Spring 已修复该功能
  */
 @Component
-@Deprecated
 public class SwaggerHeaderFilter extends AbstractGatewayFilterFactory {
     private static final String HEADER_NAME = "X-Forwarded-Prefix";
 

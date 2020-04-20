@@ -1,10 +1,15 @@
 package ai.shuzhi.iot.gateway.route.config;
 
+import ai.shuzhi.iot.gateway.route.entity.GatewayRoute;
 import ai.shuzhi.iot.gateway.route.entity.RouteDefinitionVo;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.gateway.filter.FilterDefinition;
+import org.springframework.cloud.gateway.handler.predicate.PredicateDefinition;
 import org.springframework.cloud.gateway.route.RouteDefinition;
 import org.springframework.cloud.gateway.route.RouteDefinitionRepository;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -13,6 +18,7 @@ import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +30,7 @@ public class RedisRouteDefinitionWriter implements RouteDefinitionRepository {
     @Autowired
     private final RedisTemplate redisTemplate;
 
-    private static final String ROUTE_KEY = "sss";
+    private static final String ROUTE_KEY = "gateway_routes::";
 
     @Override
     public Mono<Void> save(Mono<RouteDefinition> route) {
@@ -48,15 +54,25 @@ public class RedisRouteDefinitionWriter implements RouteDefinitionRepository {
 
     @Override
     public Flux<RouteDefinition> getRouteDefinitions() {
-        redisTemplate.setHashValueSerializer(new Jackson2JsonRedisSerializer<>(RouteDefinitionVo.class));
-        List<RouteDefinitionVo> values = redisTemplate.opsForHash().values(ROUTE_KEY);
+        redisTemplate.setHashValueSerializer(new Jackson2JsonRedisSerializer<>(GatewayRoute.class));
+        List<GatewayRoute> values = redisTemplate.opsForHash().values(ROUTE_KEY);
         List<RouteDefinition> definitionList = new ArrayList<>();
-        values.forEach(vo -> {
+        ObjectMapper objectMapper = new ObjectMapper();
+        values.forEach(gatewayRoute -> {
             RouteDefinition routeDefinition = new RouteDefinition();
-            BeanUtils.copyProperties(routeDefinition, vo);
+            try {
+                BeanUtils.copyProperties(gatewayRoute, routeDefinition);
+                routeDefinition.setFilters(objectMapper.readValue(gatewayRoute.getFilters(), new TypeReference<List<FilterDefinition>>() {
+                }));
+                routeDefinition.setPredicates(objectMapper.readValue(gatewayRoute.getPredicates(), new TypeReference<List<PredicateDefinition>>() {
+                }));
+                routeDefinition.setUri(new URI(gatewayRoute.getUri()));
+            }catch (Exception e){
+                log.error("网关路由对象转换失败", e);
+            }
             definitionList.add(routeDefinition);
         });
-        log.debug("redis 中路由定义条数： {}， {}", definitionList.size(), definitionList);
+        log.info("redis 中路由定义条数： {}， {}", definitionList.size(), definitionList);
         return Flux.fromIterable(definitionList);
     }
 }

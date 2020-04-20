@@ -1,6 +1,7 @@
 package ai.shuzhi.iot.gateway.route.config;
 
 import ai.shuzhi.iot.gateway.route.biz.RouteBiz;
+import ai.shuzhi.iot.gateway.route.entity.GatewayRoute;
 import ai.shuzhi.iot.gateway.route.entity.Route;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +20,12 @@ import java.util.List;
 @Log4j2
 public class GatewayCommandLineRunner implements CommandLineRunner {
 
+    private static final String ROUTE_KEY = "gateway_routes::";
+
     @Autowired
     private RouteBiz routeBiz;
     @Autowired
-    private RedisTemplate<Object, Object> redisTemplate;
+    private RedisTemplate redisTemplate;
 
     /**
      * 初始化路由信息到redis
@@ -34,9 +37,9 @@ public class GatewayCommandLineRunner implements CommandLineRunner {
     public void run(String... args) throws Exception {
         log.info("初始化路由配置到Redis");
         log.info("路由信息----->" + routeBiz.selectAll());
-        List<Route> routes = routeBiz.selectAll();
+        List<GatewayRoute> routes = routeBiz.selectAll();
         routes.forEach(rout -> {
-            redisTemplate.opsForHash().put("ROUTE_KEY", rout.getId(), rout);
+            redisTemplate.opsForHash().put(ROUTE_KEY, rout.getRouteId(), rout);
         });
     }
 }
