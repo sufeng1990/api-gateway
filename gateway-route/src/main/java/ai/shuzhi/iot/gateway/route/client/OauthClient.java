@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
  * @date 2020/4/17 14:17
  */
 @Component
-@FeignClient(value = "gateway-oauth" )
+@FeignClient(value = "gateway-oauth", configuration = FeignClientsConfiguration.class)
 public interface OauthClient {
     @GetMapping("oauth/test")
     Boolean test();

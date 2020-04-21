@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
  * @since 2020-04-09 13:55:38
  */
 @RestController
-@RequestMapping("sadasd")
+@RequestMapping("aa")
 public class RouteController {
     /**
      * 服务对象
@@ -25,7 +25,7 @@ public class RouteController {
      * @param id 主键
      * @return 单条数据
      */
-    @GetMapping("sadasda")
+    @GetMapping("bb")
     public String selectOne(String id) {
 //        return this.routeService.queryById(id);
         return "sadsadasdadasdas";

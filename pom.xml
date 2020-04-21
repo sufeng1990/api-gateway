@@ -9,6 +9,7 @@
     <module>common/gateway-core</module>
     <module>gateway-route</module>
     <module>gateway-oauth</module>
+    <module>eureka</module>
   </modules>
   <parent>
     <groupId>org.springframework.boot</groupId>
