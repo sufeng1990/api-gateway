@@ -9,7 +9,6 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
  *
  * @author 苏峰
  */
-@EnableAuthorizationServer
 @SpringBootApplication
 @EnableDiscoveryClient
 public class GatewayAouthApplication {
