@@ -1,5 +1,6 @@
 package ai.shuzhi.iot.gateway.aouth.entity;
 
+import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.Id;
@@ -9,6 +10,7 @@ import javax.persistence.Id;
  * @date 2020/4/26 15:48
  */
 @Data
+@Builder
 public class GatewayUser {
     @Id
     private String id;
@@ -17,4 +19,5 @@ public class GatewayUser {
     private String password;
     private String tel;
     private String gender;
+    private Long createDate;
 }

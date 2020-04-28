@@ -18,6 +18,7 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
 
     private static final String RESOURCE_ID = "oauth2";
 
+
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) {
         // 如果关闭 stateless，则 accessToken 使用时的 session id 会被记录，后续请求不携带 accessToken 也可以正常响应

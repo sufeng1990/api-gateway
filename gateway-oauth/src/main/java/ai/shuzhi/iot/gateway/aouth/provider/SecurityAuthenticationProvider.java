@@ -48,7 +48,7 @@ public class SecurityAuthenticationProvider implements AuthenticationProvider {
         // [4] 数据库用户的密码，一般都是加密过的
 //        String encryptedPassword = userDetails.getPassword();
         // 根据加密算法加密用户输入的密码，然后和数据库中保存的密码进行比较
-        if (StringUtils.equals(inputPassword, userDetails.getPassword())) {
+        if (!StringUtils.equals(inputPassword, userDetails.getPassword())) {
             throw new BadCredentialsException(userName + " 输入账号或密码不正确");
         }
 

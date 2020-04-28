@@ -12,26 +12,11 @@
   <artifactId>gateway-commons</artifactId>
   <name>gateway-commons</name>
   <description>应用网关公共包</description>
-  <properties></properties>
+  <properties>
+      <fastjson.verion>1.2.60</fastjson.verion>
+  </properties>
 
   <dependencies>
-<!--    <dependency>-->
-<!--      <groupId>javax.validation</groupId>-->
-<!--      <artifactId>validation-api</artifactId>-->
-<!--    </dependency>-->
-<!--    <dependency>-->
-<!--      <groupId>ai.shuzhi.framework</groupId>-->
-<!--      <artifactId>utils-starter</artifactId>-->
-<!--    </dependency>-->
-
-<!--    <dependency>-->
-<!--      <groupId>org.mapstruct</groupId>-->
-<!--      <artifactId>mapstruct-processor</artifactId>-->
-<!--    </dependency>-->
-<!--    <dependency>-->
-<!--      <groupId>com.github.pagehelper</groupId>-->
-<!--      <artifactId>pagehelper-spring-boot-starter</artifactId>-->
-<!--    </dependency>-->
       <dependency>
           <groupId>jakarta.validation</groupId>
           <artifactId>jakarta.validation-api</artifactId>
@@ -41,6 +26,29 @@
           <artifactId>swagger-annotations</artifactId>
           <version>1.5.21</version>
           <scope>compile</scope>
+      </dependency>
+      <dependency>
+          <groupId>com.fasterxml.jackson.core</groupId>
+          <artifactId>jackson-annotations</artifactId>
+      </dependency>
+      <dependency>
+          <groupId>org.apache.tomcat.embed</groupId>
+          <artifactId>tomcat-embed-core</artifactId>
+      </dependency>
+      <dependency>
+          <groupId>com.alibaba</groupId>
+          <artifactId>fastjson</artifactId>
+          <version>${fastjson.verion}</version>
+      </dependency>
+      <dependency>
+          <groupId>org.freemarker</groupId>
+          <artifactId>freemarker</artifactId>
+          <version>${freemarker.version}</version>
+      </dependency>
+      <dependency>
+          <groupId>org.apache.commons</groupId>
+          <artifactId>commons-lang3</artifactId>
+          <version>${commons-lang3.version}</version><!--$NO-MVN-MAN-VER$ -->
       </dependency>
   </dependencies>
 

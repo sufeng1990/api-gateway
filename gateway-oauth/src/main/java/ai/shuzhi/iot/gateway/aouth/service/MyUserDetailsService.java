@@ -27,8 +27,7 @@ public class MyUserDetailsService  implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         String passwd = "";
         System.out.println("收到的账号"+username);
-        GatewayUser gatewayUser = new GatewayUser();
-        gatewayUser.setUsername(username);
+        GatewayUser gatewayUser = GatewayUser.builder().username(username).build();
         GatewayUser user = userMapper.selectOne(gatewayUser);
         if (Objects.nonNull(user)){
             passwd = user.getPassword();
