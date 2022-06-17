@@ -13,7 +13,7 @@
   <name>gateway-commons</name>
   <description>应用网关公共包</description>
   <properties>
-      <fastjson.verion>1.2.60</fastjson.verion>
+      <fastjson.verion>1.2.83</fastjson.verion>
   </properties>
 
   <dependencies>
